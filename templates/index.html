@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AirBNB Price Prediction</title>
+	<style type="text/css">
+		.extendable:focus{
+    position: absolute;
+    width: 110%;
+    top: -1rem;
+}
+
+	body{
+  background-image: url('{{ url_for('static',filename='img/air.jpg') }}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+	</style>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<form class="form-compact" action="{{ url_for('predict') }}" method="post">
+		<div class="row paddingBottom20">
+            <div class="container col-4">
+                <div class="row">
+                    <h3 class="text-center col-12 mb-0" style="color: white;">AirBNB Price Prediction</h3>
+                    <sub class="text-right text-muted col-12"><a href="#" tabindex="-1"><i class="far fa-edit"></i></a></sub>
+                </div>
+                <div class="dropdown-divider mb-3"></div>
+                <div class="form-group row">
+                	<label for="id" class="col-4 col-form-label-sm text-right" style="color: white;">id:</label> 
+                        <div class="col-8">
+                            <div class="input-group">
+                                <input id="id" type="number" name="id" class="form-control form-control-sm" />
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="name" class="col-4 col-form-label-sm text-right" style="color: white;">Name:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="name" name="name" type="text" class="form-control form-control-sm" />
+                          </div>
+                        </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="hostid" class="col-4 col-form-label-sm text-right" style="color: white;">Host-id:</label> 
+                    <div class="col-8">
+                        <div class="input-group"> 
+                            <input id="hostid" name="hostid" type="number" class="form-control form-control-sm"  />
+                        </div>
+                    </div>
+                </div>
+		         <div class="form-group row align-items-center">
+                    <label for="hostname" class="col-4 col-form-label-sm text-right" style="color: white;">Host-Name:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                   <input id="hostname" type="text" name="hostname" class="form-control form-control-sm"  />
+		                </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="neighb_group" class="col-4 col-form-label-sm text-right" style="color: white;">Neighbourhood Group:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                     <select name="neighb_group">
+                                <option>--Neighbourhood-Group--</option>
+                                <option value="1">1.Brooklyn</option>
+                                <option value="2">2.Manhattan</option>
+                                <option value="3">3.Queens</option>
+                                <option value="4">4.Staten Island</option>
+                                <option value="5">5.Bronx</option>
+                              </select>
+		                </div>
+                    </div>
+                </div>
+                 <div class="form-group row align-items-center">
+                    <label for="neighb" class="col-4 col-form-label-sm text-right" style="color: white;">Neighbourhood:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                     <select name="neighb">
+                                    <option>--Neighbourhood--</option>
+                                    <option value="1">1.Kensington</option>
+                                    <option value="2">2.Midtown</option>
+                                    <option value="3">3.Harlem</option>
+                                    <option value="4">4.Clinton Hill</option>
+                                    <option value="5">5.East Harlem</option>
+                                    <option value="6">6.Murray Hill</option>
+                                    <option value="7">7.Bedford-Stuyvesant</option>
+                                    <option value="8">8.Hell's Kitchen</option>
+                                    <option value="9">9.Upper West Side</option>
+                                    <option value="10">10.Chinatown</option>
+                                    <option value="11">11.South Slope</option>
+                                    <option value="12">12.West Village</option>
+                                    <option value="13">13.Williamsburg</option>
+                                    <option value="14">14.Fort Greene</option>
+                                    <option value="15">15.Chelsea</option>
+                                    <option value="16">16.Crown Heights</option>
+                                    <option value="17">17.Park Slope</option>
+                                    <option value="18">18.Windsor Terrace</option>
+                                    <option value="19">19.Inwood</option>
+                                    <option value="20">20.East Village</option>
+                                    <option value="21">21.Greenpoint</option>
+                                    <option value="22">22.Bushwick</option>
+                                    <option value="23">23.Flatbush</option>
+                                    <option value="24">24.Lower East Side</option>
+                                    <option value="25">25.Prospect-Lefferts Gardens</option>
+                                    <option value="26">26.Long Island City</option>
+                                    <option value="27">27.Kips Bay</option>
+                                    <option value="28">28.SoHo</option>
+                                    <option value="29">29.Upper East Side</option>
+                                    <option value="30">30.Prospect Heights</option>
+                                    <option value="31">31.Washington Heights</option>
+                                    <option value="32">32.Woodside</option>  
+                                    <option value="33">33.Brooklyn Heights</option>
+                                    <option value="34">34.Carroll Gardens</option>
+                                    <option value="35">35.Gowanus</option>
+                                    <option value="36">36.Flatlands</option>
+                                    <option value="37">37.Cobble Hill</option>
+                                    <option value="38">38.Flushing</option>
+                                    <option value="39">39.Boerum Hill</option>
+                                    <option value="40">40.Sunnyside</option>
+                                    <option value="41">41.DUMBO</option>
+                                    <option value="42">42.St. George</option>
+                                    <option value="43">43.Highbridge</option>
+                                    <option value="44">44.Financial District</option>
+                                    <option value="45">45.Ridgewood</option>
+                                    <option value="46">46.Morningside Heights</option>
+                                    <option value="47">47.Jamaica</option>
+                                    <option value="48">48.Middle Village</option>
+                                    <option value="49">49.NoHo</option>
+                                    <option value="50">50.Ditmars Steinway</option>
+                                    <option value="51">51.Flatiron District</option>
+                                    <option value="52">52.Roosevelt Island</option>
+                                    <option value="53">53.Greenwich Village</option>
+                                    <option value="54">54.Little Italy</option>
+                                    <option value="55">55.East Flatbush</option>
+                                    <option value="56">56.Tompkinsville</option>
+                                    <option value="57">57.Astoria</option>
+                                    <option value="58">58.Clason Point</option>
+                                    <option value="59">59.Eastchester</option>
+                                    <option value="60">60.Kingsbridge</option>
+                                    <option value="61">61.Two Bridges</option>
+                                    <option value="62">62.Queens Village</option>
+                                    <option value="63">63.Rockaway Beach</option>
+                                    <option value="64">64.Forest Hills</option>
+                                    <option value="65">65.Nolita</option>
+                                    <option value="66">66.Woodlawn</option>
+                                    <option value="67">67.University Heights</option>
+                                    <option value="68">68.Gravesend</option>
+                                    <option value="69">69.Gramercy</option>
+                                    <option value="70">70.Allerton</option>
+                                    <option value="71">71.East New York</option>
+                                    <option value="72">72.Theater District</option>
+                                    <option value="73">73.Concourse Village</option>
+                                    <option value="74">74.Sheepshead Bay</option>
+                                    <option value="75">75.Emerson Hill</option>
+                                    <option value="76">76.Fort Hamilton</option>
+                                    <option value="77">77.Bensonhurst</option>
+                                    <option value="78">78.Tribeca</option>
+                                    <option value="79">79.Shore Acres</option>
+                                    <option value="80">80.Sunset Park</option>
+                                    <option value="81">81.Concourse</option>
+                                    <option value="82">82.Elmhurst</option>
+                                    <option value="83">83.Brighton Beach</option>
+                                    <option value="84">84.Jackson Heights</option>
+                                    <option value="85">85.Cypress Hills</option>
+                                    <option value="86">86.St. Albans</option>
+                                    <option value="87">87.Arrochar</option>
+                                    <option value="88">88.Rego Park</option>
+                                    <option value="89">89.Wakefield</option>
+                                    <option value="90">90.Clifton</option>
+                                    <option value="91">91.Bay Ridge</option>
+                                    <option value="92">92.Graniteville</option>
+                                    <option value="93">93.Spuyten Duyvil</option>
+                                    <option value="94">94.Stapleton</option>
+                                    <option value="95">95.Briarwood</option>
+                                    <option value="96">96.Ozone Park</option>
+                                    <option value="97">97.Columbia St</option>
+                                    <option value="98">98.Vinegar Hill</option>
+                                    <option value="99">99.Mott Haven</option>
+                                    <option value="100">100.Longwood</option>
+                                    <option value="101">101.Canarsie</option>
+                                    <option value="102">102.Battery Park City</option>
+                                    <option value="103">103.Civic Center</option>
+                                    <option value="104">104.East Elmhurst</option>
+                                    <option value="105">105.New Springville</option>
+                                    <option value="106">106.Morris Heights</option>
+                                    <option value="107">107.Arverne</option>
+                                    <option value="108">108.Cambria Heights</option>
+                                    <option value="109">109.Tottenville</option>
+                                    <option value="110">110.Mariners Harbor</option>
+                                    <option value="111">111.Concord</option>
+                                    <option value="112">112.Borough Park</option>
+                                    <option value="113">113.Bayside</option>
+                                    <option value="114">114.Downtown Brooklyn</option>
+                                    <option value="115">115.Port Morris</option>
+                                    <option value="116">116.Fieldston</option>
+                                    <option value="117">117.Kew Gardens</option>
+                                    <option value="118">118.Midwood</option>
+                                    <option value="119">119.College Point</option>
+                                    <option value="120">120.Mount Eden</option>
+                                    <option value="121">121.City Island</option>
+                                    <option value="122">122.Glendale</option>
+                                    <option value="123">123.Port Richmond</option>
+                                    <option value="124">124.Red Hook</option>
+                                    <option value="125">125.Richmond Hill</option>
+                                    <option value="126">126.Bellerose</option>
+                                    <option value="127">127.Maspeth</option>
+                                    <option value="128">128.Williamsbridge</option>
+                                    <option value="129">129.Soundview</option>
+                                    <option value="130">130.Woodhaven</option>
+                                    <option value="131">131.Woodrow</option>
+                                    <option value="132">132.Co-op City</option>
+                                    <option value="133">133.Stuyvesant Town</option>
+                                    <option value="134">134.Parkchester</option>
+                                    <option value="135">135.North Riverdale</option>
+                                    <option value="136">136.Dyker Heights</option>
+                                    <option value="137">137.Bronxdale</option>
+                                    <option value="138">138.Sea Gate</option>
+                                    <option value="139">139.Riverdale</option>
+                                    <option value="140">140.Kew Gardens Hills</option>
+                                    <option value="141">141.Bay Terrace</option>
+                                    <option value="142">142.Norwood</option>
+                                    <option value="143">143.Claremont Village</option>
+                                    <option value="144">144.Whitestone</option>
+                                    <option value="145">145.Fordham</option>
+                                    <option value="146">146.Bayswater</option>
+                                    <option value="147">147.Navy Yard</option>
+                                    <option value="148">148.Brownsville</option>
+                                    <option value="149">149.Eltingville</option>
+                                    <option value="150">150.Fresh Meadows</option>
+                                    <option value="151">151.Mount Hope</option>
+                                    <option value="152">152.Lighthouse Hill</option>
+                                    <option value="153">153.Springfield Gardens</option>
+                                    <option value="154">154.Howard Beach</option>
+                                    <option value="155">155.Belle Harbor</option>
+                                    <option value="156">156.Jamaica Estates</option>
+                                    <option value="157">157.Van Nest</option>
+                                    <option value="158">158.Morris Park</option>
+                                    <option value="159">159.West Brighton</option>
+                                    <option value="160">160.Far Rockaway</option>
+                                    <option value="161">161.South Ozone Park</option>
+                                    <option value="162">162.Tremont</option>
+                                    <option value="163">163.Corona</option>
+                                    <option value="164">164.Great Kills</option>
+                                    <option value="165">165.Manhattan Beach</option>
+                                    <option value="166">166.Marble Hill</option>
+                                    <option value="167">167.Dongan Hills</option>
+                                    <option value="168">168.Castleton Corners</option>
+                                    <option value="169">169.East Morrisania</option>
+                                    <option value="170">170.Hunts Point</option>
+                                    <option value="171">171.Neponsit</option>
+                                    <option value="172">172.Neponsit</option>
+                                    <option value="173">173.Pelham Bay</option>
+                                    <option value="174">174.Randall Manor</option>
+                                    <option value="175">175.Throgs Neck</option>
+                                    <option value="176">176.Todt Hill</option>
+                                    <option value="177">177.West Farms</option>
+                                    <option value="178">178.Silver Lake</option>
+                                    <option value="179">179.Morrisania</option>
+                                    <option value="180">180.Laurelton</option>
+                                    <option value="181">181.Grymes Hill</option>
+                                    <option value="182">182.Holliswood</option>
+                                    <option value="183">183.Pelham Gardens</option>
+                                    <option value="184">184.Belmont</option>
+                                    <option value="185">185.Rosedale</option>
+                                    <option value="186">186.Edgemere</option>
+                                    <option value="187">187.New Brighton</option>
+                                    <option value="188">188.Midland Beach</option>
+                                    <option value="189">189.Baychester</option>
+                                    <option value="190">190.Melrose</option>
+                                    <option value="191">191.Bergen Beach</option>
+                                    <option value="192">192.Richmondtown</option>
+                                    <option value="193">193.Howland Hook</option>
+                                    <option value="194">194.Schuylerville</option>
+                                    <option value="195">195.Coney Island</option>
+                                    <option value="196">196.New Dorp Beach</option>
+                                    <option value="197">197.Prince's Bay</option>
+                                    <option value="198">198.South Beach</option>
+                                    <option value="199">199.Bath Beach</option>
+                                    <option value="200">200.Jamaica Hills</option>
+                                    <option value="201">201.Oakwood</option>
+                                    <option value="202">202.Castle Hill</option>
+                                    <option value="203">203.Hollis</option>
+                                    <option value="204">204.Douglaston</option>
+                                    <option value="205">205.Huguenot</option>
+                                    <option value="206">206.Olinville</option>
+                                    <option value="207">207.Edenwald</option>
+                                    <option value="208">208.Grant City</option>
+                                    <option value="209">209.Westerleigh</option>
+                                    <option value="210">210.Bay Terrace, Staten Island</option>
+                                    <option value="211">211.Westchester Square</option>
+                                    <option value="212">212.Little Neck</option>
+                                    <option value="213">213.Fort Wadsworth</option>
+                                    <option value="214">214.Rosebank</option>
+                                    <option value="215">215.Unionport</option>
+                                    <option value="216">216.Mill Basin</option>
+                                    <option value="217">217.Arden Heights</option>
+                                    <option value="218">218.Bull's Head</option>
+                                    <option value="219">219.New Dorp</option>
+                                    <option value="220">220.Rossville</option>
+                                    <option value="221">221.Breezy Point</option>
+                                    <option value="222">222.Willowbrook</option>                                          
+                             </select>
+		                </div>
+                    </div>
+                </div>
+                 <div class="form-group row align-items-center">
+                    <label for="latitude" class="col-4 col-form-label-sm text-right" style="color: white;">Latitude:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                    <input id="latitude" type="number" step="0.00001" name="latitude" class="form-control form-control-sm" />
+		                 </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="longitude" class="col-4 col-form-label-sm text-right" style="color: white;">Longitude:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                     <input id="longitude" type="number" step="0.00001" name="longitude" class="form-control form-control-sm" />
+		                  </div>
+                    </div>
+                </div>
+                 <div class="form-group row align-items-center">
+                    <label for="roomtype" class="col-4 col-form-label-sm text-right" style="color: white;">Room-Type:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                      <select name="roomtype">
+                                    <option>--Types of room--</option>
+                                    <option value="1">1.Private room</option>
+                                    <option value="2">2.Entire home/apt</option>
+                                    <option value="3">3.Shared room</option>
+                               </select>     
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="minnight" class="col-4 col-form-label-sm text-right" style="color: white;">Minimum Nights:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+		                      <input id="minnight" type="number" name="minnight" class="form-control form-control-sm" />
+		                </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="norev" class="col-4 col-form-label-sm text-right" style="color: white;">Number of Reviews:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+                              <input id="norev" type="number" name="norev" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="lastrev" class="col-4 col-form-label-sm text-right" style="color: white;">Last Review:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+                              <input id="lastrev" type="text" name="lastrev" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="revpmonth" class="col-4 col-form-label-sm text-right" style="color: white;">Review per Month:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+                              <input id="revpmonth" type="number" step="0.01" name="revpmonth" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="hostlistc" class="col-4 col-form-label-sm text-right" style="color: white;">Number of Hosts in the Neighbourhood:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+                              <input id="hostlistc" type="number" name="hostlistc" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="av365" class="col-4 col-form-label-sm text-right" style="color: white;">Availability in the year:</label> 
+                    <div class="col-8">
+                        <div class="input-group">
+                              <input id="av365" type="number" name="av365" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+                <center>
+                	<button type="submit" style="color: red">Predict</button>
+		       	</center>
+	</form>
+
+</body>
+</html>
